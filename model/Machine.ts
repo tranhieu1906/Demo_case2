@@ -1,49 +1,49 @@
 export class Machine{
-    private _statusMachine: string;
-    private _nameMachine: string;
-    private _totalMoney: number;
-    private _timeUsed: number;
+    private statusMachine: string;
+    private nameMachine: string;
+    private totalMoney: number;
+    private timeUsed: number;
 
-    constructor(_nameMachine: string, _statusMachine: string,_timeUsed:number ,_totalMoney: number){
-        this._nameMachine = _nameMachine;
-        this._statusMachine = _statusMachine;
-        this._timeUsed = _timeUsed;
-        this._totalMoney = _totalMoney;
+    constructor(nameMachine: string, statusMachine: string,timeUsed:number ,totalMoney: number){
+        this.nameMachine = nameMachine;
+        this.statusMachine = statusMachine;
+        this.timeUsed = timeUsed;
+        this.totalMoney = totalMoney;
     }
 
     getNameMachine(){
-        return this._nameMachine
+        return this.nameMachine
     }
 
     setNameMachine(value: string){
-        this._nameMachine = value
+        this.nameMachine = value
     }
 
     getStatusMachine(){
-        return this._statusMachine
+        return this.statusMachine
     }
 
     setStatusMachine(value: string){
-        this._statusMachine = value
+        this.statusMachine = value
     }
 
     getTotalMoney(){
-        return this._totalMoney
+        return this.totalMoney
     }
 
     setTotalMoney(value: number){
-        this._totalMoney = value
+        this.totalMoney = value
     }
 
     getTimeUsed(){
-        return this._timeUsed
+        return this.timeUsed
     }
 
     setTimeUsed(value: number){
-        this._timeUsed = value
+        this.timeUsed = value
     }
 
     // public toString = (): string=>{
-    //     return `${this._nameMachine},${this._statusMachine},${this._timeUsed},${this._totalMoney}`;
+    //     return `${this.nameMachine},${this.statusMachine},${this.timeUsed},${this.totalMoney}`;
     // }
 }

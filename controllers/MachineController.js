@@ -32,7 +32,8 @@ var MachineController = /** @class */ (function () {
         }
     };
     MachineController.prototype.displayMachines = function () {
-        console.table(this.addMachine);
+        console.table(this.arrMachine);
+        menu_1.Menu.mainMenu();
     };
     MachineController.prototype.updateMachine = function (value) {
         var indexInput = value;

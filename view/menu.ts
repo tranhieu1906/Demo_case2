@@ -66,7 +66,25 @@ export class Menu {
         }
         break;
       case 4:
-
+        this.controller.displayMachines();
+        let a = parseInt(rl.question("Nhập chỉ số mà bạn muốn xóa ? :"));
+        if(a > this.controller.arrMachineLength() - 1){
+            console.log("Không tìm thấy chỉ số này !")
+        }else{
+            let a: number;
+            let str = `
+                Bạn có chắc muốn xóa máy này
+                1. Có
+                2. Không 
+            `
+            console.log(str)
+            a = +(rl.question("Nhập lựa chọn của bạn :"))
+            if(a == 1){
+                this.controller.deleteMachine(a);
+                console.log("\n----------------------Xóa máy thành công !-----------------------");
+            }
+        }
+        break;
     }
   }
 }

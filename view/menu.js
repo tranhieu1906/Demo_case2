@@ -49,6 +49,22 @@ var Menu = /** @class */ (function () {
                 }
                 break;
             case 4:
+                this.controller.displayMachines();
+                var a = parseInt(rl.question("Nhập chỉ số mà bạn muốn xóa ? :"));
+                if (a > this.controller.arrMachineLength() - 1) {
+                    console.log("Không tìm thấy chỉ số này !");
+                }
+                else {
+                    var a_1;
+                    var str_1 = "\n                B\u1EA1n c\u00F3 ch\u1EAFc mu\u1ED1n x\u00F3a m\u00E1y n\u00E0y\n                1. C\u00F3\n                2. Kh\u00F4ng \n            ";
+                    console.log(str_1);
+                    a_1 = +(rl.question("Nhập lựa chọn của bạn :"));
+                    if (a_1 == 1) {
+                        this.controller.deleteMachine(a_1);
+                        console.log("\n----------------------Xóa máy thành công !-----------------------");
+                    }
+                }
+                break;
         }
     };
     Menu.controller = new MachineController_1.MachineController;

@@ -26,7 +26,8 @@ export class MachineController {
         }
     }
     displayMachines(): void {
-        console.table(this.addMachine);
+        console.table(this.arrMachine);
+        Menu.mainMenu()
     }
     updateMachine(value: number): void {
         let indexInput = value;

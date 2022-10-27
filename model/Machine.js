@@ -2,35 +2,35 @@
 exports.__esModule = true;
 exports.Machine = void 0;
 var Machine = /** @class */ (function () {
-    function Machine(_nameMachine, _statusMachine, _timeUsed, _totalMoney) {
-        this._nameMachine = _nameMachine;
-        this._statusMachine = _statusMachine;
-        this._timeUsed = _timeUsed;
-        this._totalMoney = _totalMoney;
+    function Machine(nameMachine, statusMachine, timeUsed, totalMoney) {
+        this.nameMachine = nameMachine;
+        this.statusMachine = statusMachine;
+        this.timeUsed = timeUsed;
+        this.totalMoney = totalMoney;
     }
     Machine.prototype.getNameMachine = function () {
-        return this._nameMachine;
+        return this.nameMachine;
     };
     Machine.prototype.setNameMachine = function (value) {
-        this._nameMachine = value;
+        this.nameMachine = value;
     };
     Machine.prototype.getStatusMachine = function () {
-        return this._statusMachine;
+        return this.statusMachine;
     };
     Machine.prototype.setStatusMachine = function (value) {
-        this._statusMachine = value;
+        this.statusMachine = value;
     };
     Machine.prototype.getTotalMoney = function () {
-        return this._totalMoney;
+        return this.totalMoney;
     };
     Machine.prototype.setTotalMoney = function (value) {
-        this._totalMoney = value;
+        this.totalMoney = value;
     };
     Machine.prototype.getTimeUsed = function () {
-        return this._timeUsed;
+        return this.timeUsed;
     };
     Machine.prototype.setTimeUsed = function (value) {
-        this._timeUsed = value;
+        this.timeUsed = value;
     };
     return Machine;
 }());
