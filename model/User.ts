@@ -5,7 +5,6 @@ export class User {
   userAcount: string;
   userAge: number;
 
-
   constructor(
     userAcount: string,
     userPassWord: string,
@@ -60,7 +59,7 @@ export class User {
     this.userEmail = value;
   }
 
-  // public toString = (): string => {
-  //   return `${this.userAcount},${this.userPassWord},${this.userName},${this.userAge},${this.userEmail}`;
-  // };
+  toString(): string {
+    return `${this.userAcount},${this.userPassWord},${this.userName},${this.userAge},${this.userEmail}`;
+  }
 }

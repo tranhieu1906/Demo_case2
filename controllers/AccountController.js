@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccountController = void 0;
 var rl = require("readline-sync");
 var User_1 = require("../model/User");
@@ -7,7 +7,6 @@ var File_1 = require("../File");
 var menu_1 = require("../view/menu");
 var AccountController = /** @class */ (function () {
     function AccountController() {
-        this.fileUser = new File_1.File();
     }
     AccountController.init = function () {
         var menu = "\n        1. \u0110\u0103ng nh\u1EADp\n        2. \u0110\u0103ng k\u00ED\n        3. Tho\u00E1t\n        ";
@@ -39,7 +38,10 @@ var AccountController = /** @class */ (function () {
         console.log("------------------------login--------------------");
         var inputAccount = rl.question("Account:");
         var inputPassword = rl.question("Password:");
-        var isLogin = this.listUser.some(function (e) { return e.getUserAcount() == inputAccount && e.getUserPassWord() == inputPassword; });
+        var isLogin = this.listUser.some(function (e) {
+            return e.getUserAcount() == inputAccount &&
+                e.getUserPassWord() == inputPassword;
+        });
         if (isLogin) {
             menu_1.Menu.mainMenu();
         }
@@ -90,36 +92,45 @@ var AccountController = /** @class */ (function () {
                 flag = true;
             }
         }
-        //email
-        // while (flag) {
-        //   newEmail = rl.question("Email:");
-        //   if (!this.validateEmail(newEmail)) {
-        //     console.log("Email không hợp lệ !\n");
-        //   } else if (this.listUser.some(e => e.getUserEmail() == newEmail)) {
-        //     console.log("Email đã tồn tại !\n")
-        //   } else {
-        //     flag = false;
-        //   }
-        // }
-        // while (!flag) {
-        //   newName = rl.question("Your Name:");
-        //   if (!newName) {
-        //     console.log("không được để trống")
-        //   } else {
-        //     flag = true;
-        //   }
-        // }
-        // while (flag) {
-        //   newAge = parseInt(rl.question("Your Age:"));
-        //   if (!newAge) {
-        //     console.log("không được để trống")
-        //   } else if (this.validateAge(newAge)) {
-        //     console.log("Nhập tuổi hợp lệ")
-        //   } else {
-        //     flag = false
-        //   }
-        // }
-        this.listUser.push(new User_1.User(newAccount, newPassword, newName, newAge, newEmail));
+        // email
+        while (flag) {
+            newEmail = rl.question("Email:");
+            if (!this.validateEmail(newEmail)) {
+                console.log("Email không hợp lệ !\n");
+            }
+            else if (this.listUser.some(function (e) { return e.getUserEmail() == newEmail; })) {
+                console.log("Email đã tồn tại !\n");
+            }
+            else {
+                flag = false;
+            }
+        }
+        while (!flag) {
+            newName = rl.question("Your Name:");
+            if (!newName) {
+                console.log("không được để trống");
+            }
+            else {
+                flag = true;
+            }
+        }
+        while (flag) {
+            newAge = parseInt(rl.question("Your Age:"));
+            if (!newAge) {
+                console.log("không được để trống");
+            }
+            else if (this.validateAge(newAge)) {
+                console.log("Nhập tuổi hợp lệ");
+            }
+            else {
+                flag = false;
+            }
+        }
+        this.listUser.push(
+        //@ts-ignore
+        new User_1.User(newAccount, newPassword, newName, newAge, newEmail));
+        File_1.File.writeFile(this.PATH, this.listUser);
+        console.log("Tạo tài khoản thành công !");
         this.init();
     };
     AccountController.validatePassWord = function (inputPassword) {
@@ -135,6 +146,7 @@ var AccountController = /** @class */ (function () {
         return regex.test(inputAge);
     };
     AccountController.listUser = new Array();
+    AccountController.PATH = "./data/admin.txt";
     return AccountController;
 }());
 exports.AccountController = AccountController;

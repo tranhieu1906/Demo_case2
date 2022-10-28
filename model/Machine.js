@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.Machine = void 0;
 var Machine = /** @class */ (function () {
     function Machine(nameMachine, statusMachine, timeUsed, totalMoney) {
@@ -31,6 +31,9 @@ var Machine = /** @class */ (function () {
     };
     Machine.prototype.setTimeUsed = function (value) {
         this.timeUsed = value;
+    };
+    Machine.prototype.toString = function () {
+        return this.nameMachine + "," + this.statusMachine + "," + this.timeUsed + "," + this.totalMoney;
     };
     return Machine;
 }());

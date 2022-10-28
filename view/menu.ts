@@ -2,44 +2,43 @@ import * as rl from "readline-sync";
 import { AccountController } from "../controllers/AccountController";
 import { MachineController } from "../controllers/MachineController";
 export class Menu {
-  constructor() { }
-  static controller: MachineController = new MachineController;
+  static _MyAccount: string;
+  static _MyPassword: string;
+  static controller: MachineController = new MachineController();
+  static AccountController: AccountController;
+  constructor(_MyAccount: string, _MyPassword: string) {
+    Menu._MyAccount = _MyAccount;
+    Menu._MyPassword = _MyPassword;
+  }
   static mainMenu() {
-    let index: number;
     let menu: string = `
-     ------------------Menu-------------
     1. Hiển thị tất cả máy
     2. Thêm máy
     3. Cập nhật máy
     4. Xóa máy
-    5. Add service
-    6. Change money/hour
-    7. Total money each machine
-    8. Account management
-    9. Total revenue
-    10. Find machine
-    11. Sorting machine by name
-    12. Exit
-    --------------------------------------
-    `
-    console.log(menu)
+    5. Thay đổi giá tiền / giờ
+    6. Xuất hóa đơn
+    7. Tìm máy
+    8. Thoát
+    `;
+    console.log(menu);
     let n: number = 0;
     while (n < 1 || n > 12) {
-      n = +(rl.question("Vui lòng chọn số: "));
+      n = +rl.question("Vui lòng chọn số: ");
       if (n < 1 || n > 12) {
-        console.log("Vui lòng chọn từ 1 đến 10 !")
+        console.log("Vui lòng chọn từ 1 đến 10 !");
       }
     }
 
     switch (n) {
       case 1:
         let str = `
-            1. Hiển thị tất cả các máy bật
-            2. Hiển thị tất cả các máy tắt
-            3. Hiển thị tất cả các máy 
-            `
+1. Hiển thị tất cả các máy bật
+2. Hiển thị tất cả các máy tắt
+3. Hiển thị tất cả các máy 
+            `;
         console.log(str);
-        let number = +(rl.question("Vui lòng chọn số:"))
+        let number = +rl.question("Vui lòng chọn số:");
         switch (number) {
           case 1:
             this.controller.displayMachineAvailable();
@@ -53,36 +52,70 @@ export class Menu {
         }
         break;
       case 2:
-        this.controller.addMachine()
+        this.controller.addMachine();
         break;
       case 3:
-        this.controller.displayMachines();
-        let index = parseInt(rl.question("Chọn chỉ số muốn cập nhật :"));
-        if (index > this.controller.arrMachineLength() - 1) {
-          console.log("Không tìm thấy chỉ số !")
+        if (this.controller.arrMachineLength() <= 0) {
+          console.log("Không có máy nào để cập nhật !!");
+          this.mainMenu();
         } else {
-          this.controller.updateMachine(index);
-          console.log("\n----------------------Cập nhật thành công !-----------------------");
+          this.controller.displayMachines2();
+          let index = parseInt(rl.question("Chọn chỉ số muốn cập nhật :"));
+          if (index > this.controller.arrMachineLength() - 1) {
+            console.log("Không tìm thấy chỉ số !");
+          } else {
+            this.controller.updateMachine(index);
+            console.log(
+              "\n----------------------Cập nhật thành công !-----------------------"
+            );
+          }
         }
         break;
       case 4:
-        this.controller.displayMachines();
-        let a = parseInt(rl.question("Nhập chỉ số mà bạn muốn xóa ? :"));
-        if(a > this.controller.arrMachineLength() - 1){
-            console.log("Không tìm thấy chỉ số này !")
-        }else{
-            let a: number;
-            let str = `
+        this.controller.displayMachines2();
+        let index = parseInt(rl.question("Nhập chỉ số mà bạn muốn xóa ? :"));
+        if (index > this.controller.arrMachineLength() - 1) {
+          console.log("Không tìm thấy chỉ số này !");
+        } else {
+          let str = `
                 Bạn có chắc muốn xóa máy này
                 1. Có
                 2. Không 
-            `
-            console.log(str)
-            a = +(rl.question("Nhập lựa chọn của bạn :"))
-            if(a == 1){
-                this.controller.deleteMachine(a);
-                console.log("\n----------------------Xóa máy thành công !-----------------------");
-            }
+            `;
+          console.log(str);
+          let num = +rl.question("Nhập lựa chọn của bạn :");
+          if (num == 1) {
+            this.controller.deleteMachine(index);
+            console.log(
+              "\n----------------------Xóa máy thành công !-----------------------"
+            );
+          }
+        }
+        break;
+      case 5:
+        let money = +rl.question("chọn số tiền bạn muốn cho mỗi giờ: ");
+        this.controller.moneyPerHour = money;
+        console.log(
+          "\n----------------------Thay đổi giá tiền /giờ thành công!-----------------------"
+        );
+        Menu.mainMenu();
+        break;
+      case 6:
+        this.controller.displayMachines2();
+        n = +rl.question("Chọn máy bạn muốn in hóa đơn: ");
+        this.controller.totalMoneyMachineAvailable();
+        this.controller.displayMachineAvailable();
+        this.controller.billMachineAvailable(n);
+        Menu.mainMenu();
+        break;
+      case 7:
+        if (this.controller.arrMachineLength() > 0) {
+          let findMachine = rl.question("Nhập tên máy cần tìm:");
+          this.controller.findMachine(findMachine);
+          Menu.mainMenu();
+        } else {
+          console.log("Trong hệ thống không có máy nào !");
+          Menu.mainMenu();
         }
         break;
     }

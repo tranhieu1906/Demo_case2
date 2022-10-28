@@ -1,10 +1,10 @@
 import * as rl from "readline-sync";
 import { User } from "../model/User";
 import { File } from "../File";
-import { Menu } from "../view/menu"
+import { Menu } from "../view/menu";
 export class AccountController {
   static listUser = new Array<User>();
-  fileUser = new File();
+  static PATH = "./data/admin.txt";
   static init() {
     let menu: string = `
         1. Đăng nhập
@@ -38,24 +38,17 @@ export class AccountController {
     console.log("------------------------login--------------------");
     let inputAccount = rl.question("Account:");
     let inputPassword = rl.question("Password:");
-    let isLogin = this.listUser.some(e => e.getUserAcount() == inputAccount && e.getUserPassWord() == inputPassword)
+    let isLogin = this.listUser.some(
+      (e) =>
+        e.getUserAcount() == inputAccount &&
+        e.getUserPassWord() == inputPassword
+    );
     if (isLogin) {
-      Menu.mainMenu()
-    }else {
+      Menu.mainMenu();
+    } else {
       console.log("tài khoản,mật khẩu không đúng");
-      this.init()
+      this.init();
     }
-    // try {
-    //     if(isLogin){
-    //         const theMenu = new Menu(inputAccount,inputPassword, this)
-    //         theMenu.mainMenu()
-    //     }else{
-    //         throw new Error("Account or Password are wrong !");
-    //     }
-    // } catch (e:any) {
-    //     console.log(e.message);
-    //     this.init()
-    // }
   }
   static register() {
     let flag = true;
@@ -69,7 +62,7 @@ export class AccountController {
     while (flag) {
       newAccount = rl.question("Tài khoản:");
       if (!newAccount) {
-        console.log("không được để trống")
+        console.log("không được để trống");
       } else if (this.listUser.some((e) => e.getUserAcount() == newAccount)) {
         console.log("tài khoản đã có trong hệ thống");
       } else {
@@ -87,36 +80,41 @@ export class AccountController {
         flag = true;
       }
     }
-    //email
-    // while (flag) {
-    //   newEmail = rl.question("Email:");
-    //   if (!this.validateEmail(newEmail)) {
-    //     console.log("Email không hợp lệ !\n");
-    //   } else if (this.listUser.some(e => e.getUserEmail() == newEmail)) {
-    //     console.log("Email đã tồn tại !\n")
-    //   } else {
-    //     flag = false;
-    //   }
-    // }
-    // while (!flag) {
-    //   newName = rl.question("Your Name:");
-    //   if (!newName) {
-    //     console.log("không được để trống")
-    //   } else {
-    //     flag = true;
-    //   }
-    // }
-    // while (flag) {
-    //   newAge = parseInt(rl.question("Your Age:"));
-    //   if (!newAge) {
-    //     console.log("không được để trống")
-    //   } else if (this.validateAge(newAge)) {
-    //     console.log("Nhập tuổi hợp lệ")
-    //   } else {
-    //     flag = false
-    //   }
-    // }
-    this.listUser.push(new User(newAccount, newPassword,newName, newAge, newEmail ));
+    // email
+    while (flag) {
+      newEmail = rl.question("Email:");
+      if (!this.validateEmail(newEmail)) {
+        console.log("Email không hợp lệ !\n");
+      } else if (this.listUser.some((e) => e.getUserEmail() == newEmail)) {
+        console.log("Email đã tồn tại !\n");
+      } else {
+        flag = false;
+      }
+    }
+    while (!flag) {
+      newName = rl.question("Your Name:");
+      if (!newName) {
+        console.log("không được để trống");
+      } else {
+        flag = true;
+      }
+    }
+    while (flag) {
+      newAge = parseInt(rl.question("Your Age:"));
+      if (!newAge) {
+        console.log("không được để trống");
+      } else if (this.validateAge(newAge)) {
+        console.log("Nhập tuổi hợp lệ");
+      } else {
+        flag = false;
+      }
+    }
+    this.listUser.push(
+      //@ts-ignore
+      new User(newAccount, newPassword, newName, newAge, newEmail)
+    );
+    File.writeFile(this.PATH, this.listUser);
+    console.log("Tạo tài khoản thành công !");
     this.init();
   }
   static validatePassWord(inputPassword: string) {
@@ -130,7 +128,7 @@ export class AccountController {
     return regex.test(inputEmail);
   }
   static validateAge(inputAge: any) {
-    let regex = /\s[0-1]{1}[0-9]{0,2}/
-    return regex.test(inputAge)
+    let regex = /\s[0-1]{1}[0-9]{0,2}/;
+    return regex.test(inputAge);
   }
 }

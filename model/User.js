@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 var User = /** @class */ (function () {
     function User(userAcount, userPassWord, userName, userAge, userEmail) {
@@ -38,6 +38,9 @@ var User = /** @class */ (function () {
     };
     User.prototype.setUserEmail = function (value) {
         this.userEmail = value;
+    };
+    User.prototype.toString = function () {
+        return this.userAcount + "," + this.userPassWord + "," + this.userName + "," + this.userAge + "," + this.userEmail;
     };
     return User;
 }());

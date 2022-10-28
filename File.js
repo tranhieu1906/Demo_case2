@@ -1,17 +1,14 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.File = void 0;
 var fs = require("fs");
 var File = /** @class */ (function () {
     function File() {
     }
-    File.prototype.readFile = function (path) {
-        var data = fs.readFileSync(path);
-        return data.toString().split("\r\n");
-    };
-    File.prototype.writeFile = function (path, data) {
+    File.writeFile = function (path, data) {
         var str = "";
         data.forEach(function (e, index) {
+            console.log(e.toString());
             if (index == data.length - 1) {
                 str += e.toString();
             }
