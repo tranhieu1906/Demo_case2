@@ -10,7 +10,6 @@ export class File {
   static writeFile(path: string, data: Array<User> | Array<Machine>) {
     let str = "";
     data.forEach((e, index) => {
-      console.log(e.toString());
       if (index == data.length - 1) {
         str += e.toString();
       } else {

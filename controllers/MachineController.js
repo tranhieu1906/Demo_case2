@@ -4,11 +4,21 @@ exports.MachineController = void 0;
 var rl = require("readline-sync");
 var Machine_1 = require("../model/Machine");
 var menu_1 = require("../view/menu");
+var File_1 = require("../File");
 var MachineController = /** @class */ (function () {
     function MachineController() {
+        var _this = this;
         this.arrMachine = new Array();
         this.moneyPerHour = 5000;
+        var dataMachine = File_1.File.readFile(MachineController.PATH);
+        dataMachine.forEach(function (e) {
+            var arr = e.split(",");
+            _this.arrMachine.push(new Machine_1.Machine(arr[0], arr[1], parseInt(arr[2]), parseInt(arr[3])));
+        });
     }
+    MachineController.prototype.writeData = function () {
+        File_1.File.writeFile(MachineController.PATH, this.arrMachine);
+    };
     MachineController.prototype.setMoneyPerHour = function (value) {
         this.moneyPerHour = value;
     };
@@ -23,6 +33,7 @@ var MachineController = /** @class */ (function () {
             if (inputStatusMachine == "disable" || inputStatusMachine == "enable") {
                 var newMachine = new Machine_1.Machine(inputNameMachine.toLowerCase(), inputStatusMachine, inputTimeUsed, 0);
                 this.arrMachine.push(newMachine);
+                this.writeData();
                 menu_1.Menu.mainMenu();
             }
             else {
@@ -62,7 +73,7 @@ var MachineController = /** @class */ (function () {
                     else {
                         if (newStatus == "available" || newStatus == "enable") {
                             this.arrMachine[indexInput] = new Machine_1.Machine(newName_1.toLowerCase(), newStatus, newTimeUsed, 0);
-                            //   this.writeData();
+                            this.writeData();
                             console.log("----------------Cập nhật thành công---------------");
                             this.displayMachines();
                         }
@@ -85,6 +96,7 @@ var MachineController = /** @class */ (function () {
     };
     MachineController.prototype.deleteMachine = function (value) {
         this.arrMachine.splice(value, 1);
+        this.writeData();
         console.table(this.arrMachine);
         menu_1.Menu.mainMenu();
     };
@@ -149,7 +161,9 @@ var MachineController = /** @class */ (function () {
         newArr[index].setStatusMachine("disable");
         newArr[index].setTotalMoney(0);
         newArr[index].setTimeUsed(0);
+        this.writeData();
     };
+    MachineController.PATH = "./data/computer.txt";
     return MachineController;
 }());
 exports.MachineController = MachineController;

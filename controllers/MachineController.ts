@@ -2,10 +2,24 @@ import * as rl from "readline-sync";
 import { Machine } from "../model/Machine";
 import { Menu } from "../view/menu";
 import { AccountController } from "./AccountController";
+import { File } from "../File";
 export class MachineController {
   arrMachine = new Array<Machine>();
   moneyPerHour: number = 5000;
-  constructor() {}
+
+  static PATH = "./data/computer.txt";
+  constructor() {
+    let dataMachine = File.readFile(MachineController.PATH);
+    dataMachine.forEach((e) => {
+      let arr = e.split(",");
+      this.arrMachine.push(
+        new Machine(arr[0], arr[1], parseInt(arr[2]), parseInt(arr[3]))
+      );
+    });
+  }
+  writeData() {
+    File.writeFile(MachineController.PATH, this.arrMachine);
+  }
   setMoneyPerHour(value: number) {
     this.moneyPerHour = value;
   }
@@ -24,6 +38,7 @@ export class MachineController {
           0
         );
         this.arrMachine.push(newMachine);
+        this.writeData();
         Menu.mainMenu();
       } else {
         console.log("Nhập trạng thái máy sai !!");
@@ -64,7 +79,7 @@ export class MachineController {
                 newTimeUsed,
                 0
               );
-              //   this.writeData();
+              this.writeData();
               console.log("----------------Cập nhật thành công---------------");
               this.displayMachines();
             } else {
@@ -83,6 +98,7 @@ export class MachineController {
   }
   deleteMachine(value: number) {
     this.arrMachine.splice(value, 1);
+    this.writeData()
     console.table(this.arrMachine);
     Menu.mainMenu();
   }
@@ -147,8 +163,9 @@ export class MachineController {
       let str = e.getStatusMachine().toLowerCase();
       return str == "enable";
     });
-    newArr[index].setStatusMachine("disable") ;
+    newArr[index].setStatusMachine("disable");
     newArr[index].setTotalMoney(0);
-    newArr[index].setTimeUsed(0)
+    newArr[index].setTimeUsed(0);
+    this.writeData()
   }
 }

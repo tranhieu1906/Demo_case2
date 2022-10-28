@@ -12,7 +12,6 @@ var File = /** @class */ (function () {
     File.writeFile = function (path, data) {
         var str = "";
         data.forEach(function (e, index) {
-            console.log(e.toString());
             if (index == data.length - 1) {
                 str += e.toString();
             }
