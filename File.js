@@ -5,6 +5,10 @@ var fs = require("fs");
 var File = /** @class */ (function () {
     function File() {
     }
+    File.readFile = function (path) {
+        var data = fs.readFileSync(path);
+        return data.toString().split("\r\n");
+    };
     File.writeFile = function (path, data) {
         var str = "";
         data.forEach(function (e, index) {

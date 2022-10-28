@@ -3,6 +3,10 @@ import { Machine } from "./model/Machine";
 import { User } from "./model/User";
 
 export class File {
+  static readFile(path: string) {
+    let data = fs.readFileSync(path);
+    return data.toString().split("\r\n");
+  }
   static writeFile(path: string, data: Array<User> | Array<Machine>) {
     let str = "";
     data.forEach((e, index) => {

@@ -6,6 +6,13 @@ export class AccountController {
   static listUser = new Array<User>();
   static PATH = "./data/admin.txt";
   static init() {
+    let dataUser = File.readFile(this.PATH);
+    dataUser.forEach((e) => {
+      let arr = e.split(",");
+      this.listUser.push(
+        new User(arr[0], arr[1], arr[2], parseInt(arr[3]), arr[4])
+      );
+    });
     let menu: string = `
         1. Đăng nhập
         2. Đăng kí

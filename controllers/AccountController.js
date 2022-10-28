@@ -9,6 +9,12 @@ var AccountController = /** @class */ (function () {
     function AccountController() {
     }
     AccountController.init = function () {
+        var _this = this;
+        var dataUser = File_1.File.readFile(this.PATH);
+        dataUser.forEach(function (e) {
+            var arr = e.split(",");
+            _this.listUser.push(new User_1.User(arr[0], arr[1], arr[2], parseInt(arr[3]), arr[4]));
+        });
         var menu = "\n        1. \u0110\u0103ng nh\u1EADp\n        2. \u0110\u0103ng k\u00ED\n        3. Tho\u00E1t\n        ";
         console.log(menu);
         var temp = 0;
@@ -49,17 +55,6 @@ var AccountController = /** @class */ (function () {
             console.log("tài khoản,mật khẩu không đúng");
             this.init();
         }
-        // try {
-        //     if(isLogin){
-        //         const theMenu = new Menu(inputAccount,inputPassword, this)
-        //         theMenu.mainMenu()
-        //     }else{
-        //         throw new Error("Account or Password are wrong !");
-        //     }
-        // } catch (e:any) {
-        //     console.log(e.message);
-        //     this.init()
-        // }
     };
     AccountController.register = function () {
         var flag = true;
