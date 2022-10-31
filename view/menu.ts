@@ -20,8 +20,7 @@ export class Menu {
     6. Xuất hóa đơn
     7. Tìm máy
     8. Sắp xếp máy theo tên
-    9. Tổng doanh thu
-    10. Đăng xuất
+    9. Đăng xuất
     `;
     console.log(menu);
     let n: number = 0;
@@ -129,14 +128,10 @@ export class Menu {
         Menu.mainMenu();
         break;
       case 9:
-        console.log("Total revenue:" + this.controller.sumRevenue());
-        Menu.mainMenu();
-        break
-      case 10:
         let c8 = `
-                Bạn có chắc muốn đăng xuất
-                1. Có
-                2. Không 
+Bạn có chắc muốn đăng xuất
+1. Có
+2. Không 
             `;
         console.log(c8);
         let que = +rl.question("Nhập lựa chọn của bạn :");

@@ -101,7 +101,7 @@ export class MachineController {
   displayMachineEnable() {
     let count = 0;
     let newArr = this.arrMachine.filter((e) => {
-      let str = e.getStatusMachine().toLowerCase();
+      let str = e.getStatusMachine();
       count++;
       return str == "enable";
     });
@@ -116,7 +116,7 @@ export class MachineController {
   displayMachineDisable() {
     let count = 0;
     let newArr = this.arrMachine.filter((e) => {
-      let str = e.getStatusMachine().toLowerCase();
+      let str = e.getStatusMachine();
       count++;
       return str == "disable";
     });
@@ -148,7 +148,7 @@ export class MachineController {
   }
   totalMoneyMachineEnable() {
     this.arrMachine.forEach((e) => {
-      let str = e.getStatusMachine().toLowerCase();
+      let str = e.getStatusMachine();
       if (str == "enable") {
         e.setTotalMoney(e.getTimeUsed() * this.moneyPerHour);
       }
@@ -156,7 +156,7 @@ export class MachineController {
   }
   billMachineEnable(index: number) {
     let newArr = this.arrMachine.filter((e) => {
-      let str = e.getStatusMachine().toLowerCase();
+      let str = e.getStatusMachine();
       return str == "enable";
     });
     newArr[index].statusMachine = "disable";

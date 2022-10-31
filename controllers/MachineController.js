@@ -95,7 +95,7 @@ var MachineController = /** @class */ (function () {
     MachineController.prototype.displayMachineEnable = function () {
         var count = 0;
         var newArr = this.arrMachine.filter(function (e) {
-            var str = e.getStatusMachine().toLowerCase();
+            var str = e.getStatusMachine();
             count++;
             return str == "enable";
         });
@@ -111,7 +111,7 @@ var MachineController = /** @class */ (function () {
     MachineController.prototype.displayMachineDisable = function () {
         var count = 0;
         var newArr = this.arrMachine.filter(function (e) {
-            var str = e.getStatusMachine().toLowerCase();
+            var str = e.getStatusMachine();
             count++;
             return str == "disable";
         });
@@ -139,7 +139,7 @@ var MachineController = /** @class */ (function () {
     MachineController.prototype.totalMoneyMachineEnable = function () {
         var _this = this;
         this.arrMachine.forEach(function (e) {
-            var str = e.getStatusMachine().toLowerCase();
+            var str = e.getStatusMachine();
             if (str == "enable") {
                 e.setTotalMoney(e.getTimeUsed() * _this.moneyPerHour);
             }
@@ -147,7 +147,7 @@ var MachineController = /** @class */ (function () {
     };
     MachineController.prototype.billMachineEnable = function (index) {
         var newArr = this.arrMachine.filter(function (e) {
-            var str = e.getStatusMachine().toLowerCase();
+            var str = e.getStatusMachine();
             return str == "enable";
         });
         newArr[index].statusMachine = "disable";
