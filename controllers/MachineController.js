@@ -152,7 +152,7 @@ var MachineController = /** @class */ (function () {
         });
         newArr[index].statusMachine = "disable";
         newArr[index].totalMoney = 0;
-        newArr[index].timeUsed = 0;
+        newArr[index].setTimeUsed(0);
         this.writeData();
     };
     MachineController.prototype.sortMachineByName = function () {

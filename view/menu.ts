@@ -1,8 +1,10 @@
 import * as rl from "readline-sync";
 import { AccountController } from "../controllers/AccountController";
 import { MachineController } from "../controllers/MachineController";
+import { Machine } from "../model/Machine";
 export class Menu {
   static _MyAccount: string;
+  arrMachine = new Array<Machine>();
   static _MyPassword: string;
   static controller: MachineController = new MachineController();
   static AccountController: AccountController;
@@ -102,16 +104,11 @@ export class Menu {
         Menu.mainMenu();
         break;
       case 6:
-        // this.controller.totalMoneyMachineEnable();
-        // this.controller.displayMachineEnable();
-        // this.controller.billMachineEnable()
-        // Menu.mainMenu();
         this.controller.totalMoneyMachineEnable();
         this.controller.displayMachineEnable();
         n = +rl.question("Choose your machine you want bill: ");
         this.controller.billMachineEnable(n);
         this.controller.displayMachines();
-        
         break;
       case 7:
         if (this.controller.arrMachineLength() > 0) {

@@ -1,7 +1,6 @@
 import * as rl from "readline-sync";
 import { Machine } from "../model/Machine";
 import { Menu } from "../view/menu";
-import { AccountController } from "./AccountController";
 import { File } from "../File";
 export class MachineController {
   arrMachine = new Array<Machine>();
@@ -161,7 +160,7 @@ export class MachineController {
     });
     newArr[index].statusMachine = "disable";
     newArr[index].totalMoney = 0;
-    newArr[index].timeUsed = 0;
+    newArr[index].setTimeUsed(0);
     this.writeData();
   }
   sortMachineByName() {
