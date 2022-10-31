@@ -19,7 +19,7 @@ export class Menu {
     5. Thay đổi giá tiền / giờ
     6. Xuất hóa đơn
     7. Tìm máy
-    8. Thoát
+    8. Đăng xuất
     `;
     console.log(menu);
     let n: number = 0;
@@ -41,7 +41,7 @@ export class Menu {
         let number = +rl.question("Vui lòng chọn số:");
         switch (number) {
           case 1:
-            this.controller.displayMachineAvailable();
+            this.controller.displayMachineEnable();
             break;
           case 2:
             this.controller.displayMachineDisable();
@@ -102,10 +102,8 @@ export class Menu {
         break;
       case 6:
         this.controller.displayMachines2();
-        n = +rl.question("Chọn máy bạn muốn in hóa đơn: ");
-        this.controller.totalMoneyMachineAvailable();
-        this.controller.displayMachineAvailable();
-        this.controller.billMachineAvailable(n);
+        this.controller.totalMoneyMachineEnable();
+        this.controller.displayMachineEnable();
         Menu.mainMenu();
         break;
       case 7:
@@ -117,6 +115,22 @@ export class Menu {
           console.log("Trong hệ thống không có máy nào !");
           Menu.mainMenu();
         }
+        break;
+      case 8:
+        let c8 = `
+                Bạn có chắc muốn đăng xuất
+                1. Có
+                2. Không 
+            `;
+        console.log(c8);
+        let que = +rl.question("Nhập lựa chọn của bạn :");
+        if (que == 1) {
+          console.log("Cảm ơn đã sử dụng dịch vụ");
+          AccountController.init();
+        } else if (que == 2) {
+          this.mainMenu();
+        }
+        Menu.mainMenu();
         break;
     }
   }

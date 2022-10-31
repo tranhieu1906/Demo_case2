@@ -128,6 +128,42 @@ var AccountController = /** @class */ (function () {
         console.log("Tạo tài khoản thành công !");
         this.init();
     };
+    AccountController.displayAllUsers = function () {
+        console.table(this.listUser);
+    };
+    AccountController.deleteUsers = function (value, currentAccount) {
+        if (this.listUser[value].userAcount == currentAccount) {
+            console.log("Bạn không thể xóa tài khoản này");
+        }
+        else {
+            this.listUser.splice(value, 1);
+            this.writeData();
+            console.table(this.listUser);
+            console.log("\n----------------------Xóa thành công !-----------------------");
+        }
+    };
+    AccountController.changePassword = function (Account, checkPassword) {
+        var _this = this;
+        this.listUser.forEach(function (e) {
+            if (e.userAcount == Account) {
+                if (e.userPassWord == checkPassword) {
+                    if (_this.validatePassWord(checkPassword)) {
+                        e.userPassWord = checkPassword;
+                        _this.writeData();
+                    }
+                    else {
+                        console.log("Mật khẩu phải có tối thiểu tám ký tự, ít nhất một chữ cái và một số");
+                    }
+                }
+                else {
+                    console.log("Mật khẩu nhập lại không khớp !");
+                }
+            }
+        });
+    };
+    AccountController.writeData = function () {
+        File_1.File.writeFile(this.PATH, this.listUser);
+    };
     AccountController.validatePassWord = function (inputPassword) {
         var regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         return regex.test(inputPassword);

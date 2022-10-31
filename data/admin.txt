@@ -1,2 +1,3 @@
-admin,admin123123,admin@gmail.com,19
-hieu,hieu123123,hieu@gmail.com,19
+admin,admin123123,admin,19,admin@gmail.com
+hieu,hieu123123,hieu,20,hieu@gmail.com
+trung,trung123123,trung,26,trung@gmail.com

@@ -1,7 +1,7 @@
 node_modules
 AccountController.js
-MachinesController.js
-Machines.js
+MachineController.js
+Machine.js
 User.js
 menu.js
 File.js

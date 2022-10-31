@@ -63,46 +63,42 @@ export class MachineController {
   }
   updateMachine(value: number): void {
     let indexInput = value;
-    try {
-      if (this.arrMachine.findIndex((e, index) => indexInput == index) != -1) {
-        let newName = rl.question("Cập nhật tên máy: ");
-        let newStatus = rl.question("Cập nhật tình trạng máy: ");
-        let newTimeUsed = parseInt(rl.question("Cập nhật thời gian sử dụng: "));
-        try {
-          if (this.arrMachine.some((e) => e.getNameMachine() == newName)) {
-            console.log("Tên máy đã tồn tại !");
-          } else {
-            if (newStatus == "available" || newStatus == "enable") {
-              this.arrMachine[indexInput] = new Machine(
-                newName.toLowerCase(),
-                newStatus,
-                newTimeUsed,
-                0
-              );
-              this.writeData();
-              console.log("----------------Cập nhật thành công---------------");
-              this.displayMachines();
-            } else {
-              throw new Error("Cập nhật lỗi !! ");
-            }
-          }
-        } catch (e: any) {
-          console.log(e.message);
-        }
+
+    if (this.arrMachine.findIndex((e, index) => indexInput == index) != -1) {
+      let newName = rl.question("Cập nhật tên máy: ");
+      let newStatus = rl.question("Cập nhật tình trạng máy: ");
+      let newTimeUsed = parseInt(rl.question("Cập nhật thời gian sử dụng: "));
+
+      if (this.arrMachine.some((e) => e.getNameMachine() == newName)) {
+        console.log("Tên máy đã tồn tại !");
+        Menu.mainMenu();
       } else {
-        throw new Error("Lỗi chỉ mục!");
+        if (newStatus == "disable" || newStatus == "enable") {
+          this.arrMachine[indexInput] = new Machine(
+            newName.toLowerCase(),
+            newStatus,
+            newTimeUsed,
+            0
+          );
+          this.writeData();
+          this.displayMachines();
+        } else {
+          console.log("-------------Cập nhật lỗi-------------");
+          Menu.mainMenu();
+        }
       }
-    } catch (err: any) {
-      console.log(err.message);
+    } else {
+      console.log("-------------Lỗi chỉ mục-------------");
+      Menu.mainMenu();
     }
   }
   deleteMachine(value: number) {
     this.arrMachine.splice(value, 1);
-    this.writeData()
+    this.writeData();
     console.table(this.arrMachine);
     Menu.mainMenu();
   }
-  displayMachineAvailable() {
+  displayMachineEnable() {
     let count = 0;
     let newArr = this.arrMachine.filter((e) => {
       let str = e.getStatusMachine().toLowerCase();
@@ -111,7 +107,7 @@ export class MachineController {
     });
     if (count != 0) {
       console.table(newArr);
-      Menu.mainMenu();
+      // Menu.mainMenu();
     } else {
       console.log("Không có máy nào bật !");
       Menu.mainMenu();
@@ -150,7 +146,7 @@ export class MachineController {
       );
     }
   }
-  totalMoneyMachineAvailable() {
+  totalMoneyMachineEnable() {
     this.arrMachine.forEach((e) => {
       let str = e.getStatusMachine().toLowerCase();
       if (str == "enable") {
@@ -158,14 +154,14 @@ export class MachineController {
       }
     });
   }
-  billMachineAvailable(index: number) {
+  billMachineEnable(index: number) {
     let newArr = this.arrMachine.filter((e) => {
       let str = e.getStatusMachine().toLowerCase();
       return str == "enable";
     });
-    newArr[index].setStatusMachine("disable");
-    newArr[index].setTotalMoney(0);
-    newArr[index].setTimeUsed(0);
-    this.writeData()
+    newArr[index].statusMachine = "disable";
+    newArr[index].totalMoney = 0;
+    newArr[index].timeUsed = 0;
+    this.writeData();
   }
 }

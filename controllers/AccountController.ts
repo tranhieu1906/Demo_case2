@@ -124,6 +124,43 @@ export class AccountController {
     console.log("Tạo tài khoản thành công !");
     this.init();
   }
+  static displayAllUsers() {
+    console.table(this.listUser);
+   
+  }
+  static deleteUsers(value: number, currentAccount: string) {
+    if (this.listUser[value].userAcount == currentAccount) {
+      console.log("Bạn không thể xóa tài khoản này");
+    } else {
+      this.listUser.splice(value, 1);
+      this.writeData();
+      console.table(this.listUser);
+      console.log(
+        "\n----------------------Xóa thành công !-----------------------"
+      );
+    }
+  }
+  static changePassword(Account: string, checkPassword: string) {
+    this.listUser.forEach((e) => {
+      if (e.userAcount == Account) {
+        if (e.userPassWord == checkPassword) {
+          if (this.validatePassWord(checkPassword)) {
+            e.userPassWord = checkPassword;
+            this.writeData();
+          } else {
+            console.log(
+              "Mật khẩu phải có tối thiểu tám ký tự, ít nhất một chữ cái và một số"
+            );
+          }
+        } else {
+          console.log("Mật khẩu nhập lại không khớp !");
+        }
+      }
+    });
+  }
+  static writeData() {
+    File.writeFile(this.PATH, this.listUser);
+  }
   static validatePassWord(inputPassword: string) {
     let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     return regex.test(inputPassword);

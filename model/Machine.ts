@@ -1,8 +1,8 @@
 export class Machine {
-  private statusMachine: string;
-  private nameMachine: string;
-  private totalMoney: number;
-  private timeUsed: number;
+  statusMachine: string;
+  nameMachine: string;
+  totalMoney: number;
+  timeUsed: number;
 
   constructor(
     nameMachine: string,
