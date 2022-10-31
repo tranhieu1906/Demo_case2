@@ -6,4 +6,8 @@ may05,enable,3,15000
 may06,disable,5,0
 may07,enable,10,50000
 may08,enable,5,25000
-may09,enable,6,0
+may09,enable,6,30000
+may10,disable,20,0
+may11,enable,14,70000
+may12,disable,0,0
+may13,disable,0,0

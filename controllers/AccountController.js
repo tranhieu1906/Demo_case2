@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.AccountController = void 0;
 var rl = require("readline-sync");
 var User_1 = require("../model/User");

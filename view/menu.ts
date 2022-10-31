@@ -19,7 +19,9 @@ export class Menu {
     5. Thay đổi giá tiền / giờ
     6. Xuất hóa đơn
     7. Tìm máy
-    8. Đăng xuất
+    8. Sắp xếp máy theo tên
+    9. Tổng doanh thu
+    10. Đăng xuất
     `;
     console.log(menu);
     let n: number = 0;
@@ -101,10 +103,16 @@ export class Menu {
         Menu.mainMenu();
         break;
       case 6:
-        this.controller.displayMachines2();
+        // this.controller.totalMoneyMachineEnable();
+        // this.controller.displayMachineEnable();
+        // this.controller.billMachineEnable()
+        // Menu.mainMenu();
         this.controller.totalMoneyMachineEnable();
         this.controller.displayMachineEnable();
-        Menu.mainMenu();
+        n = +rl.question("Choose your machine you want bill: ");
+        this.controller.billMachineEnable(n);
+        this.controller.displayMachines();
+        
         break;
       case 7:
         if (this.controller.arrMachineLength() > 0) {
@@ -117,6 +125,14 @@ export class Menu {
         }
         break;
       case 8:
+        this.controller.sortMachineByName();
+        Menu.mainMenu();
+        break;
+      case 9:
+        console.log("Total revenue:" + this.controller.sumRevenue());
+        Menu.mainMenu();
+        break
+      case 10:
         let c8 = `
                 Bạn có chắc muốn đăng xuất
                 1. Có

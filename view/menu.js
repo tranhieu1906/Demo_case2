@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.Menu = void 0;
 var rl = require("readline-sync");
 var AccountController_1 = require("../controllers/AccountController");
@@ -10,7 +10,7 @@ var Menu = /** @class */ (function () {
         Menu._MyPassword = _MyPassword;
     }
     Menu.mainMenu = function () {
-        var menu = "\n    1. Hi\u1EC3n th\u1ECB t\u1EA5t c\u1EA3 m\u00E1y\n    2. Th\u00EAm m\u00E1y\n    3. C\u1EADp nh\u1EADt m\u00E1y\n    4. X\u00F3a m\u00E1y\n    5. Thay \u0111\u1ED5i gi\u00E1 ti\u1EC1n / gi\u1EDD\n    6. Xu\u1EA5t h\u00F3a \u0111\u01A1n\n    7. T\u00ECm m\u00E1y\n    8. X\u00F3a t\u00E0i kho\u1EA3n\n    9. \u0110\u0103ng xu\u1EA5t\n    10. Tho\u00E1t\n    ";
+        var menu = "\n    1. Hi\u1EC3n th\u1ECB t\u1EA5t c\u1EA3 m\u00E1y\n    2. Th\u00EAm m\u00E1y\n    3. C\u1EADp nh\u1EADt m\u00E1y\n    4. X\u00F3a m\u00E1y\n    5. Thay \u0111\u1ED5i gi\u00E1 ti\u1EC1n / gi\u1EDD\n    6. Xu\u1EA5t h\u00F3a \u0111\u01A1n\n    7. T\u00ECm m\u00E1y\n    8. S\u1EAFp x\u1EBFp m\u00E1y theo t\u00EAn\n    9. T\u1ED5ng doanh thu\n    10. \u0110\u0103ng xu\u1EA5t\n    ";
         console.log(menu);
         var n = 0;
         while (n < 1 || n > 12) {
@@ -79,10 +79,15 @@ var Menu = /** @class */ (function () {
                 Menu.mainMenu();
                 break;
             case 6:
-                this.controller.displayMachines2();
+                // this.controller.totalMoneyMachineEnable();
+                // this.controller.displayMachineEnable();
+                // this.controller.billMachineEnable()
+                // Menu.mainMenu();
                 this.controller.totalMoneyMachineEnable();
                 this.controller.displayMachineEnable();
-                Menu.mainMenu();
+                n = +rl.question("Choose your machine you want bill: ");
+                this.controller.billMachineEnable(n);
+                this.controller.displayMachines();
                 break;
             case 7:
                 if (this.controller.arrMachineLength() > 0) {
@@ -96,38 +101,14 @@ var Menu = /** @class */ (function () {
                 }
                 break;
             case 8:
-                var str8 = "\n--------------------------------\n1. Hi\u1EC3n th\u1ECB t\u1EA5t c\u1EA3 t\u00E0i kho\u1EA3n\n2. X\u00F3a t\u00E0i kho\u1EA3n\n3. Thay \u0111\u1ED5i m\u1EADt kh\u1EA9u t\u00E0i kho\u1EA3n\n--------------------------------\n                    ";
-                console.log(str8);
-                var a8 = +rl.question("Nhập lựa chọn của bạn: ");
-                switch (a8) {
-                    case 1:
-                        AccountController_1.AccountController.displayAllUsers();
-                        Menu.mainMenu();
-                        break;
-                    case 2:
-                        AccountController_1.AccountController.displayAllUsers();
-                        index = +rl.question("Nhập lựa chọn của bạn: ");
-                        var str_2 = "\nB\u1EA1n c\u00F3 ch\u1EAFc mu\u1ED1n x\u00F3a t\u00E0i kho\u1EA3n n\u00E0y\n    1. C\u00F3\n    2. Kh\u00F4ng \n";
-                        console.log(str_2);
-                        var b = +rl.question("Nhập lựa chọn của bạn :");
-                        if (b == 1) {
-                            AccountController_1.AccountController.deleteUsers(index, this._MyAccount);
-                        }
-                        Menu.mainMenu();
-                        break;
-                    case 3:
-                        var currentPassword = rl.question("Mật khẩu cũ:");
-                        var newPassword1 = rl.question("Nhập mật khẩu mới :");
-                        var newPassword2 = rl.question("Nhập lại mật khẩu mới:");
-                        if (newPassword1 === newPassword2 &&
-                            currentPassword === this._MyPassword) {
-                            AccountController_1.AccountController.changePassword(this._MyAccount, newPassword1);
-                        }
-                        Menu.mainMenu();
-                        break;
-                }
+                this.controller.sortMachineByName();
+                Menu.mainMenu();
                 break;
             case 9:
+                console.log("Total revenue:" + this.controller.sumRevenue());
+                Menu.mainMenu();
+                break;
+            case 10:
                 var c8 = "\n                B\u1EA1n c\u00F3 ch\u1EAFc mu\u1ED1n \u0111\u0103ng xu\u1EA5t\n                1. C\u00F3\n                2. Kh\u00F4ng \n            ";
                 console.log(c8);
                 var que = +rl.question("Nhập lựa chọn của bạn :");

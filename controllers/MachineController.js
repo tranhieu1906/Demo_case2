@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.MachineController = void 0;
 var rl = require("readline-sync");
 var Machine_1 = require("../model/Machine");
@@ -154,6 +154,17 @@ var MachineController = /** @class */ (function () {
         newArr[index].totalMoney = 0;
         newArr[index].timeUsed = 0;
         this.writeData();
+    };
+    MachineController.prototype.sortMachineByName = function () {
+        console.table(this.arrMachine.sort());
+        this.writeData();
+    };
+    MachineController.prototype.sumRevenue = function () {
+        var sum = 0;
+        this.arrMachine.forEach(function (e) {
+            sum += e.totalMoney;
+        });
+        return sum;
     };
     MachineController.PATH = "./data/computer.txt";
     return MachineController;

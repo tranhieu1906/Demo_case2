@@ -164,4 +164,16 @@ export class MachineController {
     newArr[index].timeUsed = 0;
     this.writeData();
   }
+  sortMachineByName() {
+    console.table(this.arrMachine.sort());
+    this.writeData();
+  }
+  sumRevenue(): number {
+    let sum = 0;
+    this.arrMachine.forEach((e) => {
+      sum += e.totalMoney;
+    });
+
+    return sum;
+  }
 }
