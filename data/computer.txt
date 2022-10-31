@@ -1,8 +1,3 @@
-may01,disable,0,0
-may02,disable,10,0
-may03,disable,0,0
-may04,disable,0,0
-may05,disable,0,0
-may06,disable,0,0
-may07,disable,13,0
-may08,disable,0,0
+may01,disable,0,50000
+may02,disable,0,0
+may03,disable,0,50000

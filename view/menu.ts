@@ -22,7 +22,8 @@ export class Menu {
     6. Xuất hóa đơn
     7. Tìm máy
     8. Sắp xếp máy theo tên
-    9. Đăng xuất
+    9. Tổng tiền
+    10. Đăng xuất
     `;
     console.log(menu);
     let n: number = 0;
@@ -106,7 +107,7 @@ export class Menu {
       case 6:
         this.controller.totalMoneyMachineEnable();
         this.controller.displayMachineEnable();
-        n = +rl.question("Choose your machine you want bill: ");
+        n = +rl.question("Chọn máy bạn muốn tính hóa đơn: ");
         this.controller.billMachineEnable(n);
         this.controller.displayMachines();
         break;
@@ -125,6 +126,10 @@ export class Menu {
         Menu.mainMenu();
         break;
       case 9:
+        console.log("Total revenue:" + this.controller.sumRevenue());
+        Menu.mainMenu();
+        break;
+      case 10:
         let c8 = `
 Bạn có chắc muốn đăng xuất
 1. Có

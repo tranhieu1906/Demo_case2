@@ -62,24 +62,23 @@ var MachineController = /** @class */ (function () {
     MachineController.prototype.updateMachine = function (value) {
         var indexInput = value;
         if (this.arrMachine.findIndex(function (e, index) { return indexInput == index; }) != -1) {
-            var newName_1 = rl.question("Cập nhật tên máy: ");
+            var newName = rl.question("Cập nhật tên máy: ");
             var newStatus = rl.question("Cập nhật tình trạng máy: ");
             var newTimeUsed = parseInt(rl.question("Cập nhật thời gian sử dụng: "));
-            if (this.arrMachine.some(function (e) { return e.getNameMachine() == newName_1; })) {
-                console.log("Tên máy đã tồn tại !");
-                menu_1.Menu.mainMenu();
+            // if (this.arrMachine.some((e) => e.getNameMachine() == newName)) {
+            //   console.log("Tên máy đã tồn tại !");
+            //   Menu.mainMenu();
+            // } else {
+            if (newStatus == "disable" || newStatus == "enable") {
+                this.arrMachine[indexInput] = new Machine_1.Machine(newName.toLowerCase(), newStatus, newTimeUsed, 0);
+                this.writeData();
+                this.displayMachines();
             }
             else {
-                if (newStatus == "disable" || newStatus == "enable") {
-                    this.arrMachine[indexInput] = new Machine_1.Machine(newName_1.toLowerCase(), newStatus, newTimeUsed, 0);
-                    this.writeData();
-                    this.displayMachines();
-                }
-                else {
-                    console.log("-------------Cập nhật lỗi-------------");
-                    menu_1.Menu.mainMenu();
-                }
+                console.log("-------------Cập nhật lỗi-------------");
+                menu_1.Menu.mainMenu();
             }
+            // }
         }
         else {
             console.log("-------------Lỗi chỉ mục-------------");
@@ -101,7 +100,6 @@ var MachineController = /** @class */ (function () {
         });
         if (count != 0) {
             console.table(newArr);
-            // Menu.mainMenu();
         }
         else {
             console.log("Không có máy nào bật !");
@@ -151,8 +149,7 @@ var MachineController = /** @class */ (function () {
             return str == "enable";
         });
         newArr[index].statusMachine = "disable";
-        newArr[index].totalMoney = 0;
-        newArr[index].setTimeUsed(0);
+        newArr[index].timeUsed = 0;
         this.writeData();
     };
     MachineController.prototype.sortMachineByName = function () {

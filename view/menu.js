@@ -6,11 +6,12 @@ var AccountController_1 = require("../controllers/AccountController");
 var MachineController_1 = require("../controllers/MachineController");
 var Menu = /** @class */ (function () {
     function Menu(_MyAccount, _MyPassword) {
+        this.arrMachine = new Array();
         Menu._MyAccount = _MyAccount;
         Menu._MyPassword = _MyPassword;
     }
     Menu.mainMenu = function () {
-        var menu = "\n    1. Hi\u1EC3n th\u1ECB t\u1EA5t c\u1EA3 m\u00E1y\n    2. Th\u00EAm m\u00E1y\n    3. C\u1EADp nh\u1EADt m\u00E1y\n    4. X\u00F3a m\u00E1y\n    5. Thay \u0111\u1ED5i gi\u00E1 ti\u1EC1n / gi\u1EDD\n    6. Xu\u1EA5t h\u00F3a \u0111\u01A1n\n    7. T\u00ECm m\u00E1y\n    8. S\u1EAFp x\u1EBFp m\u00E1y theo t\u00EAn\n    9. \u0110\u0103ng xu\u1EA5t\n    ";
+        var menu = "\n    1. Hi\u1EC3n th\u1ECB t\u1EA5t c\u1EA3 m\u00E1y\n    2. Th\u00EAm m\u00E1y\n    3. C\u1EADp nh\u1EADt m\u00E1y\n    4. X\u00F3a m\u00E1y\n    5. Thay \u0111\u1ED5i gi\u00E1 ti\u1EC1n / gi\u1EDD\n    6. Xu\u1EA5t h\u00F3a \u0111\u01A1n\n    7. T\u00ECm m\u00E1y\n    8. S\u1EAFp x\u1EBFp m\u00E1y theo t\u00EAn\n    9. \u0110\u0103ng xu\u1EA5t\n    10. T\u1ED5ng ti\u1EC1n\n    ";
         console.log(menu);
         var n = 0;
         while (n < 1 || n > 12) {
@@ -79,13 +80,9 @@ var Menu = /** @class */ (function () {
                 Menu.mainMenu();
                 break;
             case 6:
-                // this.controller.totalMoneyMachineEnable();
-                // this.controller.displayMachineEnable();
-                // this.controller.billMachineEnable()
-                // Menu.mainMenu();
                 this.controller.totalMoneyMachineEnable();
                 this.controller.displayMachineEnable();
-                n = +rl.question("Choose your machine you want bill: ");
+                n = +rl.question("Chọn máy bạn muốn tính hóa đơn: ");
                 this.controller.billMachineEnable(n);
                 this.controller.displayMachines();
                 break;
@@ -115,6 +112,10 @@ var Menu = /** @class */ (function () {
                 else if (que == 2) {
                     this.mainMenu();
                 }
+                Menu.mainMenu();
+                break;
+            case 10:
+                console.log("Total revenue:" + this.controller.sumRevenue());
                 Menu.mainMenu();
                 break;
         }
