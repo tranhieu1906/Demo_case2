@@ -4,7 +4,6 @@ export class User {
   userPassWord: string;
   userAcount: string;
   userAge: number;
-
   constructor(
     userAcount: string,
     userPassWord: string,

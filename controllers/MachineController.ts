@@ -68,19 +68,19 @@ export class MachineController {
       let newStatus = rl.question("Cập nhật tình trạng máy: ");
       let newTimeUsed = parseInt(rl.question("Cập nhật thời gian sử dụng: "));
 
-        if (newStatus == "disable" || newStatus == "enable") {
-          this.arrMachine[indexInput] = new Machine(
-            newName.toLowerCase(),
-            newStatus,
-            newTimeUsed,
-            0
-          );
-          this.writeData();
-          this.displayMachines();
-        } else {
-          console.log("-------------Cập nhật lỗi-------------");
-          Menu.mainMenu();
-        }
+      if (newStatus == "disable" || newStatus == "enable") {
+        this.arrMachine[indexInput] = new Machine(
+          newName.toLowerCase(),
+          newStatus,
+          newTimeUsed,
+          0
+        );
+        this.writeData();
+        this.displayMachines();
+      } else {
+        console.log("-------------Cập nhật lỗi-------------");
+        Menu.mainMenu();
+      }
     } else {
       console.log("-------------Lỗi chỉ mục-------------");
       Menu.mainMenu();
@@ -139,7 +139,7 @@ export class MachineController {
       );
     }
   }
-  totalMoneyMachineEnable() {
+  totalMoneyMachineEnable(index: number) {
     this.arrMachine.forEach((e) => {
       let str = e.getStatusMachine();
       if (str == "enable") {
@@ -164,7 +164,9 @@ export class MachineController {
     let sum = 0;
     this.arrMachine.forEach((e) => {
       sum += e.totalMoney;
+      e.setTotalMoney(0);
     });
+    this.writeData();
     return sum;
   }
 }

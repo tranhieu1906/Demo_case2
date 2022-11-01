@@ -19,10 +19,10 @@ export class Menu {
     3. Cập nhật máy
     4. Xóa máy
     5. Thay đổi giá tiền / giờ
-    6. Xuất hóa đơn
+    6. Tính tiền
     7. Tìm máy
     8. Sắp xếp máy theo tên
-    9. Tổng tiền
+    9. Tổng tiền trong 1 ngày 
     10. Đăng xuất
     `;
     console.log(menu);
@@ -105,9 +105,9 @@ export class Menu {
         Menu.mainMenu();
         break;
       case 6:
-        this.controller.totalMoneyMachineEnable();
         this.controller.displayMachineEnable();
         n = +rl.question("Chọn máy bạn muốn tính hóa đơn: ");
+        this.controller.totalMoneyMachineEnable(n);
         this.controller.billMachineEnable(n);
         this.controller.displayMachines();
         break;
@@ -126,7 +126,7 @@ export class Menu {
         Menu.mainMenu();
         break;
       case 9:
-        console.log("Total revenue:" + this.controller.sumRevenue());
+        console.log("-----------------Tổng tiền:" + this.controller.sumRevenue() + "-----------------");
         Menu.mainMenu();
         break;
       case 10:

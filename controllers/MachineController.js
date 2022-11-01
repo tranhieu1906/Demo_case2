@@ -65,10 +65,6 @@ var MachineController = /** @class */ (function () {
             var newName = rl.question("Cập nhật tên máy: ");
             var newStatus = rl.question("Cập nhật tình trạng máy: ");
             var newTimeUsed = parseInt(rl.question("Cập nhật thời gian sử dụng: "));
-            // if (this.arrMachine.some((e) => e.getNameMachine() == newName)) {
-            //   console.log("Tên máy đã tồn tại !");
-            //   Menu.mainMenu();
-            // } else {
             if (newStatus == "disable" || newStatus == "enable") {
                 this.arrMachine[indexInput] = new Machine_1.Machine(newName.toLowerCase(), newStatus, newTimeUsed, 0);
                 this.writeData();
@@ -78,7 +74,6 @@ var MachineController = /** @class */ (function () {
                 console.log("-------------Cập nhật lỗi-------------");
                 menu_1.Menu.mainMenu();
             }
-            // }
         }
         else {
             console.log("-------------Lỗi chỉ mục-------------");
@@ -134,7 +129,7 @@ var MachineController = /** @class */ (function () {
             console.log("\n----------------------Không tìm thấy tên máy !!-----------------------");
         }
     };
-    MachineController.prototype.totalMoneyMachineEnable = function () {
+    MachineController.prototype.totalMoneyMachineEnable = function (index) {
         var _this = this;
         this.arrMachine.forEach(function (e) {
             var str = e.getStatusMachine();
@@ -160,7 +155,9 @@ var MachineController = /** @class */ (function () {
         var sum = 0;
         this.arrMachine.forEach(function (e) {
             sum += e.totalMoney;
+            e.setTotalMoney(0);
         });
+        this.writeData();
         return sum;
     };
     MachineController.PATH = "./data/computer.txt";
